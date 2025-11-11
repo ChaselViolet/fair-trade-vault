@@ -5,14 +5,28 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Lock } from "lucide-react";
 import { toast } from "sonner";
+import { useWallet } from "@/contexts/WalletContext";
 
 export const OrderForm = () => {
+  const { isConnected, addOrder } = useWallet();
   const [orderType, setOrderType] = useState<"buy" | "sell">("buy");
   const [amount, setAmount] = useState("");
   const [price, setPrice] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!isConnected) {
+      toast.error("Please connect your wallet first");
+      return;
+    }
+
+    addOrder({
+      type: orderType,
+      amount,
+      price,
+    });
+
     toast.success("Encrypted order submitted successfully!", {
       description: "Your order will remain private until execution.",
     });
