@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 220 20% 8%;
+    --foreground: 180 5% 95%;
+
+    --card: 220 18% 12%;
+    --card-foreground: 180 5% 95%;
+
+    --popover: 220 20% 10%;
+    --popover-foreground: 180 5% 95%;
+
+    --primary: 180 75% 45%;
+    --primary-foreground: 220 20% 8%;
+
+    --secondary: 220 18% 16%;
+    --secondary-foreground: 180 5% 95%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 180 5% 65%;
+
+    --accent: 180 75% 45%;
+    --accent-foreground: 220 20% 8%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 180 5% 95%;
+
+    --success: 145 70% 45%;
+    --success-foreground: 180 5% 95%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 18%;
+    --ring: 180 75% 45%;
+
+    --radius: 0.75rem;
+
+    --chart-1: 180 75% 45%;
+    --chart-2: 145 70% 45%;
+    --chart-3: 0 75% 55%;
+    --chart-4: 280 65% 55%;
+    --chart-5: 40 75% 55%;
+
+    /* Trading specific */
+    --buy-order: 145 70% 45%;
+    --sell-order: 0 75% 55%;
+    --encrypted-glow: 180 100% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /* Trading data uses monospace */
+  .font-mono {
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism card effect */
+  .glass-card {
+    @apply bg-card/40 backdrop-blur-xl border border-border/50;
+  }
+
+  /* Encrypted glow effect */
+  .encrypted-glow {
+    box-shadow: 0 0 20px hsl(var(--encrypted-glow) / 0.3);
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--encrypted-glow) / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px hsl(var(--encrypted-glow) / 0.5);
+    }
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
